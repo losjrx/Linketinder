@@ -1,12 +1,21 @@
 import com.projeto.poo.Candidato;
 import com.projeto.poo.Empresa;
 import com.projeto.poo.Vaga;
+import frontend.Screen;
+import frontend.Tela;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class App {
 
 	public static void main(String[] args) {
+
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				new Tela().setVisible(true);
+			}
+		});
 
 		Candidato candidato = new Candidato("Jorge","jorge@jorge.com","Brasil",
 				"Goiás","747474-74","Descrição",19,"751526985-52");
