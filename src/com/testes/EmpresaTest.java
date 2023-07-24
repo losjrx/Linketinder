@@ -15,12 +15,12 @@ class EmpresaTest {
 		Empresa.zeraQuantidadeEmpresas();
         Usuario.zeraQuantidadeUsuarios();
     }
-	
-	Empresa user1 = new Empresa("Google","jorge@jorge.com","Brasil",
-			"Goiás","747474-74","Descrição","751526985-52");
-	
-	Empresa user2 = new Empresa("Amazon","jorge@jorge.com","Brasil",
-			"Goiás","747474-74","Descrição","751526985-52");
+
+	Empresa user1 = new Empresa("Amazon","amazon@amazon.com","EUA",
+			"Washington","98170","Descrição", "amazon", "12345","0000000000-01");
+
+	Empresa user2 = new Empresa("Amazon","amazon@amazon.com","EUA",
+			"Washington","98170","Descrição", "amazon", "12345","0000000000-01");
 	
 	@Test
 	void verificaQuantidadeDeUsuarios() {

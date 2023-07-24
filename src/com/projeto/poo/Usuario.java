@@ -11,13 +11,15 @@ public abstract class Usuario {
     private Map<String, Usuario> curtidas;
     private ArrayList<Usuario> matches;
     
-	public Usuario(String nome, String email, String pais, String estado, String cep, String descricao) {
+	public Usuario(String nome, String email, String pais, String estado, String cep, String descricao, String username, String senha) {
 		this.nome = nome;
 		this.email = email;
 		this.pais = pais;
 		this.estado = estado;
 		this.cep = cep;
 		this.descricao = descricao;
+		this.username = username;
+		this.senha = senha;
 		this.curtidas = new HashMap<>();
 		this.matches = new ArrayList<>();
 		quantidadeUsuarios++;

@@ -14,12 +14,12 @@ class CandidatoTest {
         Candidato.zeraQuantidadeCandidatos();
         Usuario.zeraQuantidadeUsuarios();
     }
-	
+
 	Candidato user1 = new Candidato("Jorge","jorge@jorge.com","Brasil",
-			"Goiás","747474-74","Descrição",19,"751526985-52");
-	
+			"Goiás","747474-74","Descrição", "jorge", "12345", 19,"751526985-52");
+
 	Candidato user2 = new Candidato("Jorge","jorge@jorge.com","Brasil",
-			"Goiás","747474-74","Descrição",19,"751526985-52");
+			"Goiás","747474-74","Descrição", "jorge", "12345", 19,"751526985-52");
 	
 	@Test
 	void verificaQuantidadeDeUsuarios() {

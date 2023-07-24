@@ -10,9 +10,9 @@ public class Candidato extends Usuario implements Conexao {
     private Curriculo curriculo;
     private ArrayList<Vaga> vagasRequeridas;
     
-	public Candidato(String nome, String email, String pais, String estado, String cep, String descricao, int idade,
+	public Candidato(String nome, String email, String pais, String estado, String cep, String descricao, String username, String senha, int idade,
 			String cpf) {
-		super(nome, email, pais, estado, cep, descricao);
+		super(nome, email, pais, estado, cep, descricao, username, senha);
 		this.id = ++quantidadeCandidatos;
 		this.idade = idade;
 		this.cpf = cpf;

@@ -8,8 +8,8 @@ public class Empresa extends Usuario implements Conexao {
 	private String cnpj;
     private ArrayList<Vaga> vagas;
     
-	public Empresa(String nome, String email, String pais, String estado, String cep, String descricao, String cnpj) {
-		super(nome, email, pais, estado, cep, descricao);
+	public Empresa(String nome, String email, String pais, String estado, String cep, String descricao, String cnpj, String username, String senha) {
+		super(nome, email, pais, estado, cep, descricao, username, senha);
 		this.id = ++quantidadeEmpresas;
 		this.cnpj = cnpj;
 		this.vagas = new ArrayList<>();

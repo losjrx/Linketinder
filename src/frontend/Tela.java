@@ -35,12 +35,10 @@ public class Tela extends JFrame {
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         mainPanel.add(titleLabel, BorderLayout.NORTH);
 
-        // Adicionando a imagem na posição central e superior do painel
+        // Adicionando a imagem na posição central e inferior do painel
         ImageIcon imageIcon = new ImageIcon("src/img/colab.png");
         Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(image);
-
-        // Adicionando a imagem na posição central e inferior do painel
         JLabel imageLabel = new JLabel(imageIcon);
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         mainPanel.add(imageLabel, BorderLayout.SOUTH);
@@ -155,11 +153,17 @@ public class Tela extends JFrame {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (radioButtonGroup.getSelection() == null) {
-                    JOptionPane.showMessageDialog(null, "Por favor, selecione uma opção (Candidato ou Empresa).");
+                if (candidateRadioButton.isSelected()) {
+                    // Se a opção "Candidato" estiver selecionada, abra a tela de cadastro de candidato
+                    TelaCadastroCandidato telaCadastroCandidato = new TelaCadastroCandidato();
+                    telaCadastroCandidato.setVisible(true);
+                } else if (companyRadioButton.isSelected()) {
+                    // Se a opção "Empresa" estiver selecionada, abra a tela de cadastro de empresa
+                    TelaCadastroEmpresa telaCadastroEmpresa = new TelaCadastroEmpresa();
+                    telaCadastroEmpresa.setVisible(true);
                 } else {
-                    // Aqui você pode adicionar a lógica para abrir uma tela de cadastro
-                    System.out.println("Botão de cadastrar clicado!");
+                    // Caso nenhuma opção esteja selecionada, exiba o alerta
+                    JOptionPane.showMessageDialog(null, "Por favor, selecione uma opção (Candidato ou Empresa).");
                 }
             }
         });
