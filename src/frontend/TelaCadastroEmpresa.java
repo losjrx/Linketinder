@@ -276,7 +276,7 @@ public class TelaCadastroEmpresa extends JFrame {
 
                 service.cadastraEmpresa(nome, email, pais, estado, cep, descricao, cnpj, username, senha);
 
-                return service.getEmpresa(cnpj);
+                return service.getEmpresa(username,cnpj);
             }
 
             // Método para verificar se todos os campos obrigatórios foram preenchidos

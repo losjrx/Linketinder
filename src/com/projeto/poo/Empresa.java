@@ -1,20 +1,21 @@
 package com.projeto.poo;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Empresa extends Usuario implements Conexao {
 	private static int quantidadeEmpresas;
 	private int id;
 	private String cnpj;
-    private ArrayList<Vaga> vagas;
-    
+    private LinkedList<Vaga> vagas;
+
 	public Empresa(String nome, String email, String pais, String estado, String cep, String descricao, String cnpj, String username, String senha) {
 		super(nome, email, pais, estado, cep, descricao, username, senha);
+		super.gravaChaves(username,cnpj);
 		this.id = ++quantidadeEmpresas;
 		this.cnpj = cnpj;
-		this.vagas = new ArrayList<>();
+		this.vagas = new LinkedList<>();
 	}
-	
+
 	public static int quantidadeEmpresas() {
 		return quantidadeEmpresas;
 	}
@@ -36,7 +37,7 @@ public class Empresa extends Usuario implements Conexao {
 		this.vagas.add(new Vaga(nome, tipo, salario, definicao, this, disponivel));
 	}
 	
-	public ArrayList<Vaga> listaDeVagas(){
+	public LinkedList<Vaga> listaDeVagas(){
 		return vagas;
 	}
 

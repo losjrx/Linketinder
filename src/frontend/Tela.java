@@ -1,10 +1,14 @@
 package frontend;
 
+import com.projeto.poo.Candidato;
+import com.projeto.poo.CandidatoService;
+import com.projeto.poo.Empresa;
+import com.projeto.poo.EmpresaService;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 
 public class Tela extends JFrame {
 
@@ -145,7 +149,37 @@ public class Tela extends JFrame {
                     String username = usernameField.getText();
                     String password = new String(passwordField.getPassword());
                     // Aqui você pode adicionar a lógica de autenticação, se necessário
-                    System.out.println("Usuário: " + username + ", Senha: " + password + ", Tipo: " + getSelectedType());
+
+                    if(getSelectedType().equals("Candidato")){
+
+                        Candidato candidato =  CandidatoService.autenticacaoCandidato(username, password);
+
+                        if(candidato == null){
+                            JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            usernameField.setText("");
+                            passwordField.setText("");
+                            JOptionPane.showMessageDialog(null, "Seja bem vindo!", "Olá", JOptionPane.INFORMATION_MESSAGE);
+                            TelaCandidato telaCandidato = new TelaCandidato(candidato,new EmpresaService());
+                            telaCandidato.setVisible(true);
+                        }
+                    }
+
+                    if(getSelectedType().equals("Empresa")){
+
+                        Empresa empresa =  EmpresaService.autenticacaoEmpresa(username, password);
+
+                        if(empresa == null){
+                            JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            usernameField.setText("");
+                            passwordField.setText("");
+                            JOptionPane.showMessageDialog(null, "Seja bem vindo!", "Olá", JOptionPane.INFORMATION_MESSAGE);
+                            TelaEmpresa telaEmpresa = new TelaEmpresa(empresa,new EmpresaService());
+                            telaEmpresa.setVisible(true);
+                        }
+                    }
+
                 }
             }
         });

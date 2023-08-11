@@ -24,8 +24,20 @@ public class Vaga {
 		return contadorVagas;
 	}
 
+	public String getNome(){
+		return nome;
+	}
+
+	public String getTipo(){
+		return tipo;
+	}
+
 	public Empresa getEmpresa() {
 		return empresa;
+	}
+
+	public boolean isDisponivel(){
+		return disponivel;
 	}
 
 	@Override

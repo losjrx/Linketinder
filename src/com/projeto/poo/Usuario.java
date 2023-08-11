@@ -10,6 +10,7 @@ public abstract class Usuario {
 	private String username, senha;
     private Map<String, Usuario> curtidas;
     private ArrayList<Usuario> matches;
+	private Key key;
     
 	public Usuario(String nome, String email, String pais, String estado, String cep, String descricao, String username, String senha) {
 		this.nome = nome;
@@ -24,7 +25,31 @@ public abstract class Usuario {
 		this.matches = new ArrayList<>();
 		quantidadeUsuarios++;
 	}
-	
+
+	public void gravaChaves(String k1, String k2){
+		this.key = new Key<>(k1,k2);
+	}
+
+	public Key getKey(){
+		return this.key;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getPais() {
+		return pais;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
 	public static int quantidadeUsuarios() {
 		return quantidadeUsuarios;
 	}
@@ -56,6 +81,10 @@ public abstract class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getSenha(){
+		return senha;
 	}
 
 	@Override

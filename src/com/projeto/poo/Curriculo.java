@@ -11,6 +11,18 @@ public class Curriculo {
 		this.pretensaoSalarial = pretensaoSalarial;
 	}
 
+	public String getFormacao() {
+		return formacao;
+	}
+
+	public String getCursosComplementares() {
+		return cursosComplementares;
+	}
+
+	public double getPretensaoSalarial() {
+		return pretensaoSalarial;
+	}
+
 	@Override
 	public String toString() {
 		return "Curriculo [formacao=" + formacao + ", cursosComplementares=" + cursosComplementares

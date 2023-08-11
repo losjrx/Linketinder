@@ -13,6 +13,7 @@ public class Candidato extends Usuario implements Conexao {
 	public Candidato(String nome, String email, String pais, String estado, String cep, String descricao, String username, String senha, int idade,
 			String cpf) {
 		super(nome, email, pais, estado, cep, descricao, username, senha);
+		super.gravaChaves(username,cpf);
 		this.id = ++quantidadeCandidatos;
 		this.idade = idade;
 		this.cpf = cpf;
@@ -21,6 +22,10 @@ public class Candidato extends Usuario implements Conexao {
 
 	public int getId() {
 		return id;
+	}
+
+	public int getIdade(){
+		return idade;
 	}
 
 	public static int quantidadeCandidatos() {

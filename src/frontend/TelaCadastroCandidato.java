@@ -328,7 +328,7 @@ public class TelaCadastroCandidato extends JFrame {
                         setVisible(false);
                     } catch (NumberFormatException ex) {
                         // Exceção ocorre se a conversão de String para int ou double falhar
-                        service.deletaCandidato(cpfField.getText());
+                        service.deletaCandidato(usernameField.getText(),cpfField.getText());
                         JOptionPane.showMessageDialog(TelaCadastroCandidato.this,
                                 "Insira uma idade e uma pretensão salarial válidas (números inteiros para idade e números para pretensão salarial).",
                                 "Erro", JOptionPane.ERROR_MESSAGE);
@@ -353,7 +353,7 @@ public class TelaCadastroCandidato extends JFrame {
 
                     service.cadastraCandidato(nome, email, pais, estado, cep, sobre, username, senha, idade, cpf);
 
-                    return service.getCandidato(cpf);
+                    return service.getCandidato(username,cpf);
             }
 
             // Método para verificar se todos os campos obrigatórios foram preenchidos

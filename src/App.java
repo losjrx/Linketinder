@@ -5,7 +5,7 @@ import frontend.Screen;
 import frontend.Tela;
 
 import javax.swing.*;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class App {
 
@@ -35,7 +35,7 @@ public class App {
 			System.out.println(vaga);
 		}
 		
-		ArrayList<Vaga> vagas = empresa.listaDeVagas();
+		LinkedList<Vaga> vagas = empresa.listaDeVagas();
 		
 		candidato.curtir(vagas.get(0).getEmpresa());
 		
