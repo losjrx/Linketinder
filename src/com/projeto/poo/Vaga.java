@@ -24,16 +24,44 @@ public class Vaga {
 		return contadorVagas;
 	}
 
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	public String getNome(){
 		return nome;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public String getTipo(){
 		return tipo;
 	}
 
+	public void setSalario(double salario) {
+		this.salario = salario;
+	}
+
+	public double getSalario() {
+		return salario;
+	}
+
+	public void setDefinicao(String definicao) {
+		this.definicao = definicao;
+	}
+
+	public String getDefinicao() {
+		return definicao;
+	}
+
 	public Empresa getEmpresa() {
 		return empresa;
+	}
+
+	public void setDisponivel(boolean disponivel) {
+		this.disponivel = disponivel;
 	}
 
 	public boolean isDisponivel(){

@@ -36,6 +36,10 @@ public class Empresa extends Usuario implements Conexao {
 	public void cadastraVaga(String nome, String tipo, double salario, String definicao, Empresa empresa, boolean disponivel) {
 		this.vagas.add(new Vaga(nome, tipo, salario, definicao, this, disponivel));
 	}
+
+	public void excluirVaga(Vaga vaga){
+		vagas.remove(vaga);
+	}
 	
 	public LinkedList<Vaga> listaDeVagas(){
 		return vagas;
@@ -74,8 +78,6 @@ public class Empresa extends Usuario implements Conexao {
 
 	@Override
 	public String toString() {
-		return "Empresa " + super.toString() + "[id=" + id + ", cnpj=" + cnpj + "]";
+		return super.toString();
 	}
-	
-	
 }

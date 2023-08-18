@@ -32,7 +32,8 @@ public class CandidatoService {
         return candidatos.get(new Key(username,cpf));
     }
 
-    public void deletaCandidato(String username, String cpf){
+    public static void deletaCandidato(String username, String cpf){
+        candidatosUsers.remove(username);
         candidatos.remove(new Key(username,cpf));
         System.out.println("Removido");
     }

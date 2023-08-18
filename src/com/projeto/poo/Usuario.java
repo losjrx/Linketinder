@@ -50,6 +50,10 @@ public abstract class Usuario {
 		return descricao;
 	}
 
+	public String getUsername(){
+		return username;
+	}
+
 	public static int quantidadeUsuarios() {
 		return quantidadeUsuarios;
 	}
@@ -89,7 +93,7 @@ public abstract class Usuario {
 
 	@Override
 	public String toString() {
-		return "[nome=" + nome + ", email=" + email + ", pais=" + pais + ", estado=" + estado + ", cep=" + cep
+		return nome + ", email=" + email + ", pais=" + pais + ", estado=" + estado + ", cep=" + cep
 				+ ", descricao=" + descricao;
 	}
 }

@@ -3,14 +3,14 @@ package frontend;
 import com.projeto.poo.Empresa;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TelaCadastroVaga extends JFrame {
 
     private Empresa empresa;
-    private TelaEmpresa telaEmpresa; // Adicione este atributo
-
+    private TelaEmpresa telaEmpresa;
     private JTextField nomeField;
     private JTextField tipoField;
     private JTextField salarioField;
@@ -53,6 +53,9 @@ public class TelaCadastroVaga extends JFrame {
         // Adicione aqui os elementos gráficos para outros campos
 
         JButton salvarButton = new JButton("Salvar");
+        salvarButton.setBackground(new Color(243, 131, 6));
+        salvarButton.setForeground(new Color(255, 255, 255, 255));
+        salvarButton.setBorder(new RoundedBorder(5, Color.WHITE));
 
         salvarButton.addActionListener(new ActionListener() {
             @Override
@@ -64,7 +67,7 @@ public class TelaCadastroVaga extends JFrame {
                 boolean disponivel = disponivelComboBox.getSelectedIndex() == 0;
 
                 empresa.cadastraVaga(nome, tipo, salario, definicao, empresa, disponivel);
-                telaEmpresa.atualizarListaVagas();
+                telaEmpresa.atualizarListaVagas(telaEmpresa);
 
                 JOptionPane.showMessageDialog(null, "Vaga cadastrada com sucesso!");
 

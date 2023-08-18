@@ -38,18 +38,49 @@ public class TelaEmpresa extends JFrame {
         JPanel cadastrarVagaPanel = createCadastrarVagaPanel(this);
 
         // Criando o painel com a lista de vagas
-        JScrollPane vagasPanel = createVagasPanel();
+        JScrollPane vagasPanel = createVagasPanel(this);
 
         // Criando o painel com a lista de candidatos
         JPanel candidatosPanel = createCandidatosPanel();
 
+        //Painel para o botão Excluit conta
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+        // Botão para excluir conta
+        JButton excluirContaButton = new JButton("Excluir conta");
+        excluirContaButton.setBackground(new Color(243, 131, 6));
+        excluirContaButton.setForeground(new Color(255, 255, 255, 255));
+        excluirContaButton.setBorder(new RoundedBorder(5, Color.WHITE));
+        excluirContaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int confirmResult = JOptionPane.showConfirmDialog(
+                        TelaEmpresa.this,
+                        "Tem certeza que deseja excluir sua conta?",
+                        "Excluir Conta",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+                if (confirmResult == JOptionPane.YES_OPTION) {
+                    EmpresaService.deletaEmpresa(empresa.getUsername(), empresa.getCnpj());
+                    dispose(); // Fechar a tela após exclusão
+                }
+            }
+        });
+
+        buttonPanel.add(excluirContaButton);
+
         // Adicionando os painéis ao contentPanel
+        contentPanel.add(buttonPanel);
         contentPanel.add(titlePanel);
         contentPanel.add(cadastrarVagaPanel);
         contentPanel.add(vagasPanel);
         contentPanel.add(candidatosPanel);
 
         add(contentPanel);
+
+        contentPanel.add(Box.createVerticalStrut(10)); // Espaçamento
     }
 
     private JPanel createTitlePanel() {
@@ -67,6 +98,9 @@ public class TelaEmpresa extends JFrame {
 
     private JPanel createCadastrarVagaPanel(TelaEmpresa telaEmpresa) {
         JButton cadastrarVagaButton = new JButton("Cadastre uma vaga");
+        cadastrarVagaButton.setBackground(new Color(243, 131, 6));
+        cadastrarVagaButton.setForeground(new Color(255, 255, 255, 255));
+        cadastrarVagaButton.setBorder(new RoundedBorder(5, Color.WHITE));
 
         JPanel cadastrarVagaPanel = new JPanel();
         cadastrarVagaPanel.add(cadastrarVagaButton);
@@ -83,8 +117,8 @@ public class TelaEmpresa extends JFrame {
         return cadastrarVagaPanel;
     }
 
-    public void atualizarListaVagas() {
-        JScrollPane vagasScrollPane = createVagasPanel();
+    public void atualizarListaVagas(TelaEmpresa telaEmpresa) {
+        JScrollPane vagasScrollPane = createVagasPanel(telaEmpresa);
         vagasScrollPane.setBorder(BorderFactory.createEmptyBorder());
 
         // Encontre o componente que contém as vagas e substitua-o pelo novo JScrollPane
@@ -99,7 +133,7 @@ public class TelaEmpresa extends JFrame {
         }
     }
 
-    private JScrollPane createVagasPanel() {
+    private JScrollPane createVagasPanel(TelaEmpresa telaEmpresa) {
         JPanel vagasPanel = new JPanel();
         vagasPanel.setLayout(new BoxLayout(vagasPanel, BoxLayout.Y_AXIS));
 
@@ -107,7 +141,42 @@ public class TelaEmpresa extends JFrame {
             JPanel vagaRow = new JPanel(new FlowLayout(FlowLayout.LEFT));
             JLabel vagaLabel = new JLabel(vaga.getNome() + " - " + vaga.getTipo());
             vagaLabel.setForeground(vaga.isDisponivel() ? Color.BLUE : Color.RED);
+
+            JButton editarButton = new JButton("Editar");
+            editarButton.setBackground(new Color(243, 131, 6));
+            editarButton.setForeground(new Color(255, 255, 255, 255));
+            editarButton.setBorder(new RoundedBorder(5, Color.WHITE));
+            editarButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    new TelaEditarVaga(vaga,telaEmpresa).setVisible(true);
+                }
+            });
+
+            JButton excluirButton = new JButton("Excluir");
+            excluirButton.setBackground(new Color(243, 131, 6));
+            excluirButton.setForeground(new Color(255, 255, 255, 255));
+            excluirButton.setBorder(new RoundedBorder(5, Color.WHITE));
+            excluirButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int confirmResult = JOptionPane.showConfirmDialog(
+                            TelaEmpresa.this,
+                            "Tem certeza que deseja excluir esta vaga?",
+                            "Excluir Vaga",
+                            JOptionPane.YES_NO_OPTION
+                    );
+
+                    if (confirmResult == JOptionPane.YES_OPTION) {
+                        empresa.excluirVaga(vaga);
+                        atualizarListaVagas(telaEmpresa); // Atualiza a lista de vagas após a exclusão
+                    }
+                }
+            });
+
             vagaRow.add(vagaLabel);
+            vagaRow.add(editarButton);
+            vagaRow.add(excluirButton);
             vagasPanel.add(vagaRow);
         }
 
@@ -133,11 +202,42 @@ public class TelaEmpresa extends JFrame {
                     + " | Pretensão Salarial: " + candidato.getCurriculo().getPretensaoSalarial());
 
             JButton curtirButton = new JButton("Curtir");
+            curtirButton.setBackground(new Color(243, 131, 6));
+            curtirButton.setForeground(new Color(255, 255, 255, 255));
+            curtirButton.setBorder(new RoundedBorder(5, Color.WHITE));
 
             curtirButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+
                     empresa.curtir(candidato);
+
+                    if(empresa.verificarMatch(candidato)){
+                        // Carregar a imagem que deseja exibir
+                        ImageIcon icon = new ImageIcon("src/img/colab.png");
+
+                        // Criar um painel para conter a imagem e o texto
+                        JPanel panel = new JPanel();
+                        panel.setLayout(new BorderLayout());
+
+                        // Adicionar a imagem ao painel
+                        JLabel imageLabel = new JLabel(icon);
+                        panel.add(imageLabel, BorderLayout.CENTER);
+
+                        // Criar uma label com o texto "It's a match!"
+                        JLabel textLabel = new JLabel("It's a match!");
+                        textLabel.setFont(new Font("Arial", Font.BOLD, 20));
+                        textLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                        panel.add(textLabel, BorderLayout.SOUTH);
+
+                        // Exibir o JOptionPane personalizado
+                        JOptionPane.showMessageDialog(
+                                null,
+                                panel,
+                                "It's a match!",
+                                JOptionPane.PLAIN_MESSAGE
+                        );
+                    }
                 }
             });
 

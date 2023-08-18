@@ -31,7 +31,8 @@ public class EmpresaService {
         return empresas.get(new Key<>(username,cnpj));
     }
 
-    public void deletaEmpresa(String username, String cnpj){
+    public static void deletaEmpresa(String username, String cnpj){
+        empresasUsers.remove(username);
         empresas.remove(new Key<>(username,cnpj));
         System.out.println("Removido");
     }
