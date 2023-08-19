@@ -39,6 +39,10 @@ public class Empresa extends Usuario implements Conexao {
 		System.out.println(id);
 	}
 
+	public void setIdBd(int id){
+		this.id = id;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -47,8 +51,10 @@ public class Empresa extends Usuario implements Conexao {
 		return cnpj;
 	}
 	
-	public void cadastraVaga(String nome, String tipo, double salario, String definicao, Empresa empresa, boolean disponivel) {
-		this.vagas.add(new Vaga(nome, tipo, salario, definicao, this, disponivel));
+	public Vaga cadastraVaga(String nome, String tipo, double salario, String definicao, Empresa empresa, boolean disponivel) {
+		Vaga vaga = new Vaga(nome, tipo, salario, definicao, this, disponivel);
+		this.vagas.add(vaga);
+		return vaga;
 	}
 
 	public void excluirVaga(Vaga vaga){

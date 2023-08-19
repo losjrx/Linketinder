@@ -34,6 +34,10 @@ public class Candidato extends Usuario implements Conexao {
 		System.out.println(id);
 	}
 
+	public void setIdBd(int id){
+		this.id = id;
+	}
+
 	public int getId() {
 		return id;
 	}

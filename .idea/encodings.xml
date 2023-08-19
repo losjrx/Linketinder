@@ -2,6 +2,10 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/App.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/com/projeto/poo/Candidato.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/com/projeto/poo/CandidatoService.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/com/projeto/poo/Empresa.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/com/projeto/poo/EmpresaService.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="PROJECT" charset="windows-1252" />

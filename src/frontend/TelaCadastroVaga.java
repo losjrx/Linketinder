@@ -1,6 +1,8 @@
 package frontend;
 
 import com.projeto.poo.Empresa;
+import com.projeto.poo.EmpresaService;
+import com.projeto.poo.Vaga;
 
 import javax.swing.*;
 import java.awt.*;
@@ -66,7 +68,10 @@ public class TelaCadastroVaga extends JFrame {
                 String definicao = definicaoArea.getText();
                 boolean disponivel = disponivelComboBox.getSelectedIndex() == 0;
 
-                empresa.cadastraVaga(nome, tipo, salario, definicao, empresa, disponivel);
+                Vaga vaga = empresa.cadastraVaga(nome, tipo, salario, definicao, empresa, disponivel);
+
+                EmpresaService.cadastraVaga(vaga);
+
                 telaEmpresa.atualizarListaVagas(telaEmpresa);
 
                 JOptionPane.showMessageDialog(null, "Vaga cadastrada com sucesso!");

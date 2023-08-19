@@ -168,6 +168,7 @@ public class TelaEmpresa extends JFrame {
                     );
 
                     if (confirmResult == JOptionPane.YES_OPTION) {
+                        EmpresaService.excluiVaga(vaga);
                         empresa.excluirVaga(vaga);
                         atualizarListaVagas(telaEmpresa); // Atualiza a lista de vagas após a exclusão
                     }
@@ -212,6 +213,8 @@ public class TelaEmpresa extends JFrame {
 
                     empresa.curtir(candidato);
 
+                    EmpresaService.gravaCurtida(empresa, candidato);
+
                     if(empresa.verificarMatch(candidato)){
                         // Carregar a imagem que deseja exibir
                         ImageIcon icon = new ImageIcon("src/img/colab.png");
@@ -225,7 +228,7 @@ public class TelaEmpresa extends JFrame {
                         panel.add(imageLabel, BorderLayout.CENTER);
 
                         // Criar uma label com o texto "It's a match!"
-                        JLabel textLabel = new JLabel("It's a match!");
+                        JLabel textLabel = new JLabel("It's a match! Entre em contato com o candidato: "+candidato.getEmail());
                         textLabel.setFont(new Font("Arial", Font.BOLD, 20));
                         textLabel.setHorizontalAlignment(SwingConstants.CENTER);
                         panel.add(textLabel, BorderLayout.SOUTH);
@@ -235,6 +238,39 @@ public class TelaEmpresa extends JFrame {
                                 null,
                                 panel,
                                 "It's a match!",
+                                JOptionPane.PLAIN_MESSAGE
+                        );
+                    } else {
+                        // Carregar a imagem que deseja exibir
+                        ImageIcon icon = new ImageIcon("src/img/like.png");
+
+                        // Definir o tamanho desejado para a imagem
+                        int width = 100; // Largura desejada
+                        int height = 100; // Altura desejada
+
+                        // Redimensionar a imagem para o tamanho desejado
+                        Image resizedImage = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+                        icon = new ImageIcon(resizedImage);
+
+                        // Criar um painel para conter a imagem e o texto
+                        JPanel panel = new JPanel();
+                        panel.setLayout(new BorderLayout());
+
+                        // Adicionar a imagem ao painel
+                        JLabel imageLabel = new JLabel(icon);
+                        panel.add(imageLabel, BorderLayout.CENTER);
+
+                        // Criar uma label com o texto "Curtida registrada!"
+                        JLabel textLabel = new JLabel("Curtida registrada!");
+                        textLabel.setFont(new Font("Arial", Font.BOLD, 20));
+                        textLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                        panel.add(textLabel, BorderLayout.SOUTH);
+
+                        // Exibir o JOptionPane personalizado
+                        JOptionPane.showMessageDialog(
+                                null,
+                                panel,
+                                "Like!",
                                 JOptionPane.PLAIN_MESSAGE
                         );
                     }

@@ -1,7 +1,4 @@
-import com.projeto.poo.Candidato;
-import com.projeto.poo.CandidatoService;
-import com.projeto.poo.Empresa;
-import com.projeto.poo.Vaga;
+import com.projeto.poo.*;
 import frontend.TelaInicial;
 
 import javax.swing.*;
@@ -14,6 +11,8 @@ public class App {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				new CandidatoService().carregaCandidatos();
+				new EmpresaService().carregaEmpresas();
+				new CandidatoService().carregaCurtidas();
 				new TelaInicial().setVisible(true);
 			}
 		});

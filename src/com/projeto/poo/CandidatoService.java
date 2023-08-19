@@ -28,6 +28,11 @@ public class CandidatoService {
 
     }
 
+    public void carregaCurtidas(){
+        Connection conn = connection.recuperarConexao();
+        new ContasDAO(conn).carregarCurtidas();
+    }
+
     public void cadastraCandidato(String nome,String email,String pais,String estado,String cep,String sobre,String username,String senha,int idade,String  cpf, String formacao, String cursos, double pretensaoSalarial) throws LinketinderException {
 
         Key chaveTeste = new Key(username, cpf);
@@ -56,9 +61,31 @@ public class CandidatoService {
         return candidatos.get(new Key(username,cpf));
     }
 
+    public static void editaCurriculo(Candidato candidato, String formacao, String cursos, double pretSalarial){
+        candidato.getCurriculo().setFormacao(formacao);
+        candidato.getCurriculo().setCursosComplementares(cursos);
+        candidato.getCurriculo().setPretensaoSalarial(pretSalarial);
+
+        ConnectionFactory connection = new ConnectionFactory();
+        Connection conn = connection.recuperarConexao();
+        new ContasDAO(conn).editarCurriculo(candidatosUsers.get(candidato.getUsername()));
+    }
+
+    public static void gravaCurtida(Candidato candidato, Empresa empresa){
+        ConnectionFactory connection = new ConnectionFactory();
+        Connection conn = connection.recuperarConexao();
+        new ContasDAO(conn).gravarCurtida(candidato, empresa, 2);
+    }
+
     public static void deletaCandidato(String username, String cpf){
+
+        ConnectionFactory connection = new ConnectionFactory();
+        Connection conn = connection.recuperarConexao();
+        new ContasDAO(conn).deletarCandidato(candidatosUsers.get(username));
+
         candidatosUsers.remove(username);
         candidatos.remove(new Key(username,cpf));
+
         System.out.println("Removido");
     }
 

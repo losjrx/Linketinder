@@ -1,6 +1,7 @@
 package frontend;
 
 import com.projeto.poo.Candidato;
+import com.projeto.poo.CandidatoService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,9 +56,7 @@ public class TelaEditarCurriculo extends JFrame {
                 String novosCursosComplementares = cursosComplementaresTextArea.getText();
                 double novaPretensaoSalarial = Double.parseDouble(pretensaoSalarialField.getText());
 
-                candidato.getCurriculo().setFormacao(novaFormacao);
-                candidato.getCurriculo().setCursosComplementares(novosCursosComplementares);
-                candidato.getCurriculo().setPretensaoSalarial(novaPretensaoSalarial);
+                new CandidatoService().editaCurriculo(candidato, novaFormacao, novosCursosComplementares, novaPretensaoSalarial);
 
                 telaCandidato.refreshVagas(telaCandidato);
                 JOptionPane.showMessageDialog(null, "Currículo atualizado com sucesso!");

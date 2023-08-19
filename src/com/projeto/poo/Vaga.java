@@ -1,5 +1,7 @@
 package com.projeto.poo;
 
+import java.util.UUID;
+
 public class Vaga {
 	static int contadorVagas = 0;
 	private int id;
@@ -11,7 +13,7 @@ public class Vaga {
 	private Empresa empresa;
 	
 	public Vaga(String nome, String tipo, double salario, String definicao, Empresa empresa, boolean disponivel) {
-		this.id = ++contadorVagas;
+		setId();
 		this.nome = nome;
 		this.tipo = tipo;
 		this.salario = salario;
@@ -22,6 +24,23 @@ public class Vaga {
 	
 	public static int totalVagasCadastradas(){
 		return contadorVagas;
+	}
+
+	public void setId() {
+		String uuid = UUID.randomUUID().toString().substring(0, 5);
+
+		int numericValue = 0;
+		for (char c : uuid.toCharArray()) {
+			numericValue = numericValue + (int) c;
+		}
+
+		// Converter a string concatenada em um número inteiro
+		this.id = numericValue;
+		System.out.println(id);
+	}
+
+	public void setIdBd(int id){
+		this.id = id;
 	}
 
 	public int getId() {

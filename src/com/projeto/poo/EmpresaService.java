@@ -14,6 +14,20 @@ public class EmpresaService {
     public EmpresaService() {
         this.connection = new ConnectionFactory();
     }
+
+    public void carregaEmpresas(){
+        Connection conn = connection.recuperarConexao();
+        empresasUsers = new ContasDAO(conn).carregarEmpresas();
+        new ContasDAO(conn).carregarVagas();
+
+        for (Map.Entry<String, Empresa> entry : empresasUsers.entrySet()){
+            String chave = entry.getKey();
+            Empresa empresa = entry.getValue();
+
+            empresas.put(empresa.getKey(), empresa);
+        }
+    }
+
     public void cadastraEmpresa(String nome,String email,String pais,String estado,String cep,String sobre,String cnpj,String username,String senha) throws LinketinderException {
 
         Key chaveTeste = new Key(username,cnpj);
@@ -41,9 +55,38 @@ public class EmpresaService {
     }
 
     public static void deletaEmpresa(String username, String cnpj){
+
+        ConnectionFactory connection = new ConnectionFactory();
+        Connection conn = connection.recuperarConexao();
+        new ContasDAO(conn).deletarEmpresa(empresasUsers.get(username));
+
         empresasUsers.remove(username);
         empresas.remove(new Key<>(username,cnpj));
         System.out.println("Removido");
+    }
+
+    public static void cadastraVaga(Vaga vaga){
+        ConnectionFactory connection = new ConnectionFactory();
+        Connection conn = connection.recuperarConexao();
+        new ContasDAO(conn).cadastrarVaga(vaga);
+    }
+
+    public static void editaVaga(Vaga vaga){
+        ConnectionFactory connection = new ConnectionFactory();
+        Connection conn = connection.recuperarConexao();
+        new ContasDAO(conn).editarVaga(vaga);
+    }
+
+    public static void excluiVaga(Vaga vaga){
+        ConnectionFactory connection = new ConnectionFactory();
+        Connection conn = connection.recuperarConexao();
+        new ContasDAO(conn).excluirVaga(vaga);
+    }
+
+    public static void gravaCurtida(Empresa empresa, Candidato candidato){
+        ConnectionFactory connection = new ConnectionFactory();
+        Connection conn = connection.recuperarConexao();
+        new ContasDAO(conn).gravarCurtida(candidato, empresa, 1);
     }
 
     public static Empresa autenticacaoEmpresa(String username, String password){

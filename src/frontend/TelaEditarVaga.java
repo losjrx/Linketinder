@@ -80,6 +80,8 @@ public class TelaEditarVaga extends JFrame {
                 vaga.setDefinicao(definitionTextArea.getText());
                 vaga.setDisponivel(availableComboBox.getSelectedItem().equals("Sim"));
 
+                EmpresaService.editaVaga(vaga);
+
                 // Atualizar a vaga no serviço
                 telaEmpresa.atualizarListaVagas(telaEmpresa);
 
