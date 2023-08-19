@@ -27,11 +27,6 @@ class CandidatoTest {
 	}
 	
 	@Test
-	void verificaIdDoCandidato() {
-			assertEquals(1, user1.getId());
-	}
-	
-	@Test
 	void verificaSeObjetoVagasRequeridasFoiInstanciado() {
 		 assertNotNull(user1.getVagas());
 	}

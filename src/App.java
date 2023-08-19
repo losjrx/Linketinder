@@ -1,8 +1,8 @@
 import com.projeto.poo.Candidato;
+import com.projeto.poo.CandidatoService;
 import com.projeto.poo.Empresa;
 import com.projeto.poo.Vaga;
-import frontend.Screen;
-import frontend.Tela;
+import frontend.TelaInicial;
 
 import javax.swing.*;
 import java.util.LinkedList;
@@ -13,33 +13,11 @@ public class App {
 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				new Tela().setVisible(true);
+				new CandidatoService().carregaCandidatos();
+				new TelaInicial().setVisible(true);
 			}
 		});
 
-		Candidato candidato = new Candidato("Jorge","jorge@jorge.com","Brasil",
-				"Goiás","747474-74","Descrição", "jorge", "12345", 19,"751526985-52");
-		
-		candidato.cadastraCurriculo("Bacharel em Sistemas de Informação", "Inglês", 5000.00);
-		
-		System.out.println(candidato);
-		
-		Empresa empresa = new Empresa("Amazon","amazon@amazon.com","EUA",
-				"Washington","98170","Descrição", "amazon", "12345","0000000000-01");
-		
-		empresa.cadastraVaga("Analista de suporte", "CLT", 3500.00, "Atendimento", empresa, true);
-		
-		System.out.println(empresa);
-		
-		for (Vaga vaga : empresa.listaDeVagas()) {
-			System.out.println(vaga);
-		}
-		
-		LinkedList<Vaga> vagas = empresa.listaDeVagas();
-		
-		candidato.curtir(vagas.get(0).getEmpresa());
-		
-		empresa.curtir(candidato);
 	}
 
 }

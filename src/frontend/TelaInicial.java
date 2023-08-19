@@ -10,12 +10,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Tela extends JFrame {
+public class TelaInicial extends JFrame {
 
     private JRadioButton candidateRadioButton;
     private JRadioButton companyRadioButton;
 
-    public Tela() {
+    public TelaInicial() {
         // Configurações básicas da janela
         setTitle("Linketinder");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

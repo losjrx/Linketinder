@@ -1,6 +1,7 @@
 package com.projeto.poo;
 
 import javax.swing.*;
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,13 +9,36 @@ public class CandidatoService {
     public static Map<Key,Candidato> candidatos = new HashMap<>();
     public static Map<String,Candidato> candidatosUsers = new HashMap<>();
 
-    public void cadastraCandidato(String nome,String email,String pais,String estado,String cep,String sobre,String username,String senha,int idade,String  cpf) throws LinketinderException {
+    private ConnectionFactory connection;
+
+    public CandidatoService() {
+        this.connection = new ConnectionFactory();
+    }
+
+    public void carregaCandidatos(){
+        Connection conn = connection.recuperarConexao();
+        candidatosUsers = new ContasDAO(conn).carregarCandidatos();
+
+        for (Map.Entry<String, Candidato> entry : candidatosUsers.entrySet()){
+            String chave = entry.getKey();
+            Candidato candidato = entry.getValue();
+
+            candidatos.put(candidato.getKey(), candidato);
+        }
+
+    }
+
+    public void cadastraCandidato(String nome,String email,String pais,String estado,String cep,String sobre,String username,String senha,int idade,String  cpf, String formacao, String cursos, double pretensaoSalarial) throws LinketinderException {
 
         Key chaveTeste = new Key(username, cpf);
 
         if(candidatos.get(chaveTeste) == null) {
 
             Candidato novoCandidato = new Candidato(nome, email, pais, estado, cep, sobre, username, senha, idade, cpf);
+            novoCandidato.cadastraCurriculo(formacao,cursos,pretensaoSalarial);
+
+            Connection conn = connection.recuperarConexao();
+            new ContasDAO(conn).cadastrarNovoCandidato(novoCandidato);
 
             candidatos.put(novoCandidato.getKey(),novoCandidato);
 

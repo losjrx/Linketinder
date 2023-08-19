@@ -318,7 +318,6 @@ public class TelaCadastroCandidato extends JFrame {
 
                     try {
                         Candidato candidato = criarCandidato();
-                        candidato.cadastraCurriculo(formationField.getText(), complementaryCoursesField.getText(), Double.parseDouble(salaryExpectationField.getText()));
 
                         // Exemplo de exibição das informações cadastradas
                         System.out.println("Candidato cadastrado: " + candidato);
@@ -351,7 +350,7 @@ public class TelaCadastroCandidato extends JFrame {
                     int idade = Integer.parseInt(ageField.getText());
                     String cpf = cpfField.getText();
 
-                    service.cadastraCandidato(nome, email, pais, estado, cep, sobre, username, senha, idade, cpf);
+                    service.cadastraCandidato(nome, email, pais, estado, cep, sobre, username, senha, idade, cpf,formationField.getText(), complementaryCoursesField.getText(), Double.parseDouble(salaryExpectationField.getText()));
 
                     return service.getCandidato(username,cpf);
             }

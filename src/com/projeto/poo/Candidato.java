@@ -1,6 +1,7 @@
 package com.projeto.poo;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Candidato extends Usuario implements Conexao {
 	private static int quantidadeCandidatos = 0;
@@ -14,10 +15,23 @@ public class Candidato extends Usuario implements Conexao {
 			String cpf) {
 		super(nome, email, pais, estado, cep, descricao, username, senha);
 		super.gravaChaves(username,cpf);
-		this.id = ++quantidadeCandidatos;
+		setId();
 		this.idade = idade;
 		this.cpf = cpf;
 		this.vagasRequeridas = new ArrayList<>();
+	}
+
+	public void setId() {
+		String uuid = UUID.randomUUID().toString().substring(0, 5);
+
+		int numericValue = 0;
+		for (char c : uuid.toCharArray()) {
+			numericValue = numericValue + (int) c;
+		}
+
+		// Converter a string concatenada em um número inteiro
+		this.id = numericValue;
+		System.out.println(id);
 	}
 
 	public int getId() {

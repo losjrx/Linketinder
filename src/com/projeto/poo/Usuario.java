@@ -38,12 +38,20 @@ public abstract class Usuario {
 		return nome;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
 	public String getPais() {
 		return pais;
 	}
 
 	public String getEstado() {
 		return estado;
+	}
+
+	public String getCep() {
+		return cep;
 	}
 
 	public String getDescricao() {

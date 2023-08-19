@@ -1,6 +1,7 @@
 package com.projeto.poo;
 
 import java.util.LinkedList;
+import java.util.UUID;
 
 public class Empresa extends Usuario implements Conexao {
 	private static int quantidadeEmpresas;
@@ -11,7 +12,7 @@ public class Empresa extends Usuario implements Conexao {
 	public Empresa(String nome, String email, String pais, String estado, String cep, String descricao, String cnpj, String username, String senha) {
 		super(nome, email, pais, estado, cep, descricao, username, senha);
 		super.gravaChaves(username,cnpj);
-		this.id = ++quantidadeEmpresas;
+		setId();
 		this.cnpj = cnpj;
 		this.vagas = new LinkedList<>();
 	}
@@ -24,7 +25,20 @@ public class Empresa extends Usuario implements Conexao {
 	public static void zeraQuantidadeEmpresas() {
 		quantidadeEmpresas = 0;
 	}
-	
+
+	public void setId() {
+		String uuid = UUID.randomUUID().toString().substring(0, 5);
+
+		int numericValue = 0;
+		for (char c : uuid.toCharArray()) {
+			numericValue = numericValue + (int) c;
+		}
+
+		// Converter a string concatenada em um número inteiro
+		this.id = numericValue;
+		System.out.println(id);
+	}
+
 	public int getId() {
 		return id;
 	}

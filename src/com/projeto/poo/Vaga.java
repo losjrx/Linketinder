@@ -24,6 +24,10 @@ public class Vaga {
 		return contadorVagas;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

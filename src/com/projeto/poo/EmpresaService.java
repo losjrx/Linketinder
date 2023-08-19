@@ -1,6 +1,7 @@
 package com.projeto.poo;
 
 import javax.swing.*;
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +9,11 @@ public class EmpresaService {
     public static Map<Key,Empresa> empresas = new HashMap<>();
     public static Map<String,Empresa> empresasUsers = new HashMap<>();
 
+    private ConnectionFactory connection;
+
+    public EmpresaService() {
+        this.connection = new ConnectionFactory();
+    }
     public void cadastraEmpresa(String nome,String email,String pais,String estado,String cep,String sobre,String cnpj,String username,String senha) throws LinketinderException {
 
         Key chaveTeste = new Key(username,cnpj);
@@ -15,6 +21,9 @@ public class EmpresaService {
         if(empresas.get(chaveTeste) == null) {
 
             Empresa novaEmpresa = new Empresa(nome, email, pais, estado, cep, sobre, cnpj, username, senha);
+
+            Connection conn = connection.recuperarConexao();
+            new ContasDAO(conn).cadastrarNovaEmpresa(novaEmpresa);
 
             empresas.put(novaEmpresa.getKey(),novaEmpresa);
 
