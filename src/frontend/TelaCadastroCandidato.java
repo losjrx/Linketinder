@@ -327,10 +327,15 @@ public class TelaCadastroCandidato extends JFrame {
                         setVisible(false);
                     } catch (NumberFormatException ex) {
                         // Exceção ocorre se a conversão de String para int ou double falhar
-                        service.deletaCandidato(usernameField.getText(),cpfField.getText());
-                        JOptionPane.showMessageDialog(TelaCadastroCandidato.this,
-                                "Insira uma idade e uma pretensão salarial válidas (números inteiros para idade e números para pretensão salarial).",
-                                "Erro", JOptionPane.ERROR_MESSAGE);
+
+                        try{
+                            service.deletaCandidato(usernameField.getText(),cpfField.getText());
+                        }catch (NullPointerException n){
+                            JOptionPane.showMessageDialog(TelaCadastroCandidato.this,
+                                    "Insira uma idade e uma pretensão salarial válidas (números inteiros para idade e números para pretensão salarial).",
+                                    "Erro", JOptionPane.ERROR_MESSAGE);
+                        }
+
                     }
 
                 } else {
@@ -347,7 +352,16 @@ public class TelaCadastroCandidato extends JFrame {
                     String sobre = aboutField.getText();
                     String username = usernameField.getText();
                     String senha = String.valueOf(passwordField.getPassword());
+
+                try {
                     int idade = Integer.parseInt(ageField.getText());
+                    double pretensaoSalarial = Double.parseDouble(salaryExpectationField.getText());
+                } catch (NumberFormatException e) {
+                    throw e; // Lançar a exceção novamente (opcional)
+                }
+
+                int idade = Integer.parseInt(ageField.getText());
+
                     String cpf = cpfField.getText();
 
                     service.cadastraCandidato(nome, email, pais, estado, cep, sobre, username, senha, idade, cpf,formationField.getText(), complementaryCoursesField.getText(), Double.parseDouble(salaryExpectationField.getText()));
