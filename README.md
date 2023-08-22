@@ -25,9 +25,9 @@ O Linketinder é um projeto desenvolvido em Java que simula uma plataforma de bu
 5. Importe as dependências do Maven.
 6. Compile e execute a classe `App.java` para iniciar a aplicação.
 
-## Screenshots
+## Screenshot
 
-![Screenshot 1]([https://imgur.com/a/knB3Ffq](https://i.imgur.com/37wjpjl.png))
+![Screenshot 1](https://i.imgur.com/37wjpjl.png)
 
 ## Contribuição
 
